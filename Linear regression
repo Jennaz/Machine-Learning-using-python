@@ -1,0 +1,43 @@
+
+from numpy import loadtxt, zeros, ones, array, linspace, logspace
+from pylab import scatter, show, title, xlabel, ylabel, plot, contour
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import linear_model
+import pandas as pd
+
+
+#Load the dataset
+data = loadtxt('ex1data1.txt', delimiter=',')
+
+#Plot the data
+scatter(data[:, 0], data[:, 1], marker='o', c='b')
+title('Profits distribution')
+xlabel('Population of City in 10,000s')
+ylabel('Profit in $10,000s')
+show()
+
+X = data[:, 0:1]
+y = data[:, 1]
+
+# Create linear regression object
+regr = linear_model.LinearRegression()
+
+# Train the model using the training sets
+regr.fit(X, y)
+
+
+# The coefficients
+print('intersect: \n', regr.intercept_)
+print('Coefficients: \n', regr.coef_)
+
+
+# Plot outputs
+plt.scatter(X, y,  color='black')
+plt.plot(X, regr.predict(X), color='blue',
+         linewidth=3)
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
